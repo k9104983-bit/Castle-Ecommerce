@@ -20,7 +20,7 @@ import com.keerthana.product.dto.PlaceOrderRequest;
 import com.keerthana.product.service.OrderService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://intelligent-love-production-cfdf.up.railway.app")
 @RequestMapping("/orders")
 public class OrderController {
 

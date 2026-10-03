@@ -11,7 +11,7 @@ import com.keerthana.product.CartItem;
 import com.keerthana.product.service.CartService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://intelligent-love-production-cfdf.up.railway.app")
 @RequestMapping("/cart")
 public class CartController {
 
