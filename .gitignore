@@ -1,0 +1,25 @@
+frontendnode_modules
+frontenddist
+frontend.env
+frontend.env.local
+
+backendtarget
+backend.env
+
+.classpath
+.project
+.settings
+.vscode
+.idea
+
+.DS_Store
+Thumbs.db
+.log
+# Eclipse workspace
+Backend/.metadata/
+Backend/.recommenders/
+
+# Eclipse project files
+Backend/.classpath
+Backend/.project
+Backend/.settings/
