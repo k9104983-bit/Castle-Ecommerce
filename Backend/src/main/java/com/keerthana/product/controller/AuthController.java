@@ -14,7 +14,7 @@ import com.keerthana.product.dto.VerifyOtpRequest;
 import com.keerthana.product.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "https://intelligent-love-production-cfdf.up.railway.app")
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/auth")
 public class AuthController {
 

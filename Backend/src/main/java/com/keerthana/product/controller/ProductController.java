@@ -8,7 +8,8 @@ import com.keerthana.product.Product;
 import com.keerthana.product.service.ProductService;
 
 @RestController
-@CrossOrigin(origins = "https://intelligent-love-production-cfdf.up.railway.app")@RequestMapping("/products")
+@RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
 
     private final ProductService productService;
