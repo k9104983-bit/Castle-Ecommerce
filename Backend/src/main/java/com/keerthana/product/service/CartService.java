@@ -23,11 +23,6 @@ public class CartService {
         this.productRepository = productRepository;
     }
 
-    /*
-    ============================================================
-    GET CART
-    ============================================================
-    */
 
     public List<CartItem> getCart(String userEmail) {
 
@@ -35,11 +30,7 @@ public class CartService {
                 .findByUserEmail(userEmail);
     }
 
-    /*
-    ============================================================
-    ADD TO CART
-    ============================================================
-    */
+   
 
     public CartItem addToCart(CartItem cartItem) {
 
@@ -64,9 +55,7 @@ public class CartService {
             );
         }
 
-        /*
-        Find actual product
-        */
+       
 
         Product product =
                 productRepository
@@ -82,9 +71,6 @@ public class CartService {
             );
         }
 
-        /*
-        Check stock
-        */
 
         int availableStock =
                 product.getQuantity();
@@ -96,11 +82,7 @@ public class CartService {
             );
         }
 
-        /*
-        Always use current product
-        information instead of trusting
-        frontend price/name.
-        */
+        
 
         cartItem.setProductName(
                 product.getName()
@@ -110,11 +92,7 @@ public class CartService {
                 product.getPrice()
         );
 
-        /*
-        Make sure requested quantity
-        is valid.
-        */
-
+        
         int requestedQuantity =
                 cartItem.getQuantity();
 
@@ -122,10 +100,7 @@ public class CartService {
             requestedQuantity = 1;
         }
 
-        /*
-        Check if this product is
-        already in this user's cart.
-        */
+       
 
         List<CartItem> existingItems =
                 cartRepository
@@ -171,9 +146,7 @@ public class CartService {
             }
         }
 
-        /*
-        New cart item
-        */
+      
 
         if (requestedQuantity >
                 availableStock) {
@@ -194,11 +167,7 @@ public class CartService {
         );
     }
 
-    /*
-    ============================================================
-    UPDATE CART QUANTITY
-    ============================================================
-    */
+    
 
     public CartItem updateCartItem(
             int id,
@@ -220,9 +189,7 @@ public class CartService {
             );
         }
 
-        /*
-        Get current product stock.
-        */
+       
 
         Product product =
                 productRepository
@@ -242,11 +209,7 @@ public class CartService {
         int availableStock =
                 product.getQuantity();
 
-        /*
-        Prevent cart quantity from
-        exceeding stock.
-        */
-
+        
         if (availableStock <= 0) {
 
             throw new IllegalArgumentException(
@@ -264,9 +227,7 @@ public class CartService {
             );
         }
 
-        /*
-        Refresh product information.
-        */
+        
 
         existingItem.setProductName(
                 product.getName()
@@ -285,22 +246,14 @@ public class CartService {
         );
     }
 
-    /*
-    ============================================================
-    REMOVE FROM CART
-    ============================================================
-    */
+    
 
     public void removeFromCart(int id) {
 
         cartRepository.deleteById(id);
     }
 
-    /*
-    ============================================================
-    CLEAR CART
-    ============================================================
-    */
+  
 
     public void clearCart(
             String userEmail) {
