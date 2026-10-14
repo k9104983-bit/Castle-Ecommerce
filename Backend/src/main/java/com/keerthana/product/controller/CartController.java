@@ -23,11 +23,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    /*
-    ============================================================
-    GET CART
-    ============================================================
-    */
+    
 
     @GetMapping("/{userEmail}")
     public List<CartItem> getCart(
@@ -38,11 +34,7 @@ public class CartController {
         );
     }
 
-    /*
-    ============================================================
-    ADD TO CART
-    ============================================================
-    */
+   
 
     @PostMapping
     public CartItem addToCart(
@@ -63,11 +55,7 @@ public class CartController {
         }
     }
 
-    /*
-    ============================================================
-    UPDATE CART
-    ============================================================
-    */
+  
 
     @PutMapping("/{id}")
     public CartItem updateCartItem(
@@ -114,11 +102,7 @@ public class CartController {
         }
     }
 
-    /*
-    ============================================================
-    REMOVE
-    ============================================================
-    */
+  
 
     @DeleteMapping("/{id}")
     public void removeFromCart(
@@ -127,11 +111,7 @@ public class CartController {
         cartService.removeFromCart(id);
     }
 
-    /*
-    ============================================================
-    CLEAR CART
-    ============================================================
-    */
+   
 
     @DeleteMapping("/user/{userEmail}")
     public void clearCart(
