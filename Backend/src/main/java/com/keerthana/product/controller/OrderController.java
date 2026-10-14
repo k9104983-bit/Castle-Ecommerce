@@ -32,11 +32,6 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    /*
-    ============================================================
-    PLACE ORDER
-    ============================================================
-    */
 
     @PostMapping
     public Order placeOrder(
@@ -58,11 +53,7 @@ public class OrderController {
         return order;
     }
 
-    /*
-    ============================================================
-    GET USER ORDERS
-    ============================================================
-    */
+ 
 
     @GetMapping("/user/{userEmail}")
     public List<Order> getUserOrders(
@@ -72,11 +63,7 @@ public class OrderController {
                 .getUserOrders(userEmail);
     }
 
-    /*
-    ============================================================
-    GET SINGLE ORDER
-    ============================================================
-    */
+  
 
     @GetMapping("/{id}")
     public Order getOrder(
@@ -96,11 +83,7 @@ public class OrderController {
         return order;
     }
 
-    /*
-    ============================================================
-    CANCEL ORDER
-    ============================================================
-    */
+   
 
     @PutMapping("/cancel/{id}")
     public Order cancelOrder(
