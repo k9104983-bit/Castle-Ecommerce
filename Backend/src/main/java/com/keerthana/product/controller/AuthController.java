@@ -26,9 +26,6 @@ public class AuthController {
     }
 
 
-    /* =========================================================
-       REGISTER
-    ========================================================= */
 
     @PostMapping("/register")
     public Map<String, Object> register(
@@ -74,10 +71,7 @@ public class AuthController {
     }
 
 
-    /* =========================================================
-       LOGIN
-    ========================================================= */
-
+ 
     @PostMapping("/login")
     public Map<String, Object> login(
             @RequestBody User user) {
@@ -140,9 +134,6 @@ public class AuthController {
     }
 
 
-    /* =========================================================
-       VERIFY OTP
-    ========================================================= */
 
     @PostMapping("/verify-otp")
     public boolean verifyOtp(
@@ -155,9 +146,6 @@ public class AuthController {
     }
 
 
-    /* =========================================================
-       RESEND OTP
-    ========================================================= */
 
     @PostMapping("/resend-otp")
     public Map<String, Object> resendOtp(
