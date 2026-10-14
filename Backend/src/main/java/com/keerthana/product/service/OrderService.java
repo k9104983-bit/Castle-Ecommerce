@@ -35,11 +35,7 @@ public class OrderService {
         this.emailService = emailService;
     }
 
-    /*
-    ============================================================
-    PLACE ORDER
-    ============================================================
-    */
+   
 
     @Transactional
     public Order placeOrder(
@@ -61,9 +57,7 @@ public class OrderService {
             return null;
         }
 
-        /*
-        ADDRESS VALIDATION
-        */
+       
 
         if (request.getFullName() == null
                 || request.getFullName().isBlank()
@@ -81,10 +75,7 @@ public class OrderService {
             return null;
         }
 
-        /*
-        COD ONLY
-        */
-
+        
         if (request.getPaymentMethod() == null
                 || !request.getPaymentMethod()
                         .equalsIgnoreCase(
@@ -94,11 +85,7 @@ public class OrderService {
             return null;
         }
 
-        /*
-        ========================================================
-        CHECK STOCK BEFORE CREATING ORDER
-        ========================================================
-        */
+        
 
         for (CartItem cartItem :
                 cartItems) {
@@ -129,11 +116,7 @@ public class OrderService {
             }
         }
 
-        /*
-        ========================================================
-        CREATE ORDER
-        ========================================================
-        */
+       
 
         Order order = new Order();
 
@@ -155,10 +138,7 @@ public class OrderService {
                 "CASH_ON_DELIVERY"
         );
 
-        /*
-        ADDRESS
-        */
-
+        
         order.setFullName(
                 request.getFullName()
         );
@@ -185,11 +165,7 @@ public class OrderService {
 
         double total = 0;
 
-        /*
-        ========================================================
-        CREATE ORDER ITEMS + REDUCE STOCK
-        ========================================================
-        */
+       
 
         for (CartItem cartItem :
                 cartItems) {
@@ -205,9 +181,7 @@ public class OrderService {
                 return null;
             }
 
-            /*
-            Reduce stock
-            */
+         
 
             int newStock =
                     product.getQuantity()
@@ -225,10 +199,7 @@ public class OrderService {
                     product
             );
 
-            /*
-            Create order item
-            */
-
+           
             OrderItem orderItem =
                     new OrderItem();
 
@@ -257,34 +228,24 @@ public class OrderService {
                     * cartItem.getQuantity();
         }
 
-        /*
-        TOTAL
-        */
-
+       
         order.setTotalAmount(
                 total
         );
 
-        /*
-        SAVE ORDER
-        */
-
+       
         Order savedOrder =
                 orderRepository.save(
                         order
                 );
 
-        /*
-        CLEAR CART
-        */
+        
 
         cartRepository.deleteAll(
                 cartItems
         );
 
-        /*
-        CONFIRMATION EMAIL
-        */
+        
 
         try {
 
@@ -305,11 +266,7 @@ public class OrderService {
         return savedOrder;
     }
 
-    /*
-    ============================================================
-    GET USER ORDERS
-    ============================================================
-    */
+   
 
     public List<Order> getUserOrders(
             String userEmail) {
@@ -320,11 +277,7 @@ public class OrderService {
                 );
     }
 
-    /*
-    ============================================================
-    GET ORDER
-    ============================================================
-    */
+  
 
     public Order getOrderById(
             int id) {
@@ -334,20 +287,13 @@ public class OrderService {
                 .orElse(null);
     }
 
-    /*
-    ============================================================
-    CANCEL ORDER
-    ============================================================
-    */
-
+   
     @Transactional
     public Order cancelOrder(
             int id,
             String userEmail) {
 
-        /*
-        Find order
-        */
+        
 
         Order order =
                 orderRepository
@@ -358,11 +304,6 @@ public class OrderService {
             return null;
         }
 
-        /*
-        ========================================================
-        USER PROTECTION
-        ========================================================
-        */
 
         if (userEmail == null
                 || userEmail.isBlank()) {
@@ -376,11 +317,6 @@ public class OrderService {
             return null;
         }
 
-        /*
-        ========================================================
-        ALREADY CANCELLED
-        ========================================================
-        */
 
         if ("CANCELLED".equalsIgnoreCase(
                 order.getStatus())) {
@@ -388,11 +324,7 @@ public class OrderService {
             return order;
         }
 
-        /*
-        ========================================================
-        DELIVERED ORDERS CANNOT BE CANCELLED
-        ========================================================
-        */
+        
 
         if ("DELIVERED".equalsIgnoreCase(
                 order.getStatus())) {
@@ -400,11 +332,7 @@ public class OrderService {
             return null;
         }
 
-        /*
-        ========================================================
-        RESTORE STOCK
-        ========================================================
-        */
+     
 
         for (OrderItem item :
                 order.getItems()) {
@@ -429,11 +357,7 @@ public class OrderService {
             }
         }
 
-        /*
-        ========================================================
-        UPDATE STATUS
-        ========================================================
-        */
+       
 
         order.setStatus(
                 "CANCELLED"
@@ -444,11 +368,7 @@ public class OrderService {
                         order
                 );
 
-        /*
-        ========================================================
-        CANCELLATION EMAIL
-        ========================================================
-        */
+        
 
         try {
 
@@ -461,10 +381,7 @@ public class OrderService {
 
         } catch (Exception e) {
 
-            /*
-            Email failure should NOT
-            undo the cancellation.
-            */
+          
 
             System.out.println(
                     "Cancellation email failed: "
