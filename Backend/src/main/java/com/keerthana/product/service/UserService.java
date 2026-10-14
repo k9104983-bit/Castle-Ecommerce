@@ -24,9 +24,7 @@ public class UserService {
     }
 
 
-    /* =========================================================
-       REGISTER USER
-    ========================================================= */
+   
 
     public User registerUser(User user) {
 
@@ -55,10 +53,7 @@ public class UserService {
 
         user.setEmail(email);
 
-        /*
-         * Every new public registration
-         * must be a normal USER.
-         */
+        
         user.setRole("USER");
 
         String otp =
@@ -84,9 +79,7 @@ public class UserService {
     }
 
 
-    /* =========================================================
-       LOGIN
-    ========================================================= */
+   
 
     public User loginUser(
             String email,
@@ -114,9 +107,7 @@ public class UserService {
             return null;
         }
 
-        /*
-         * User must verify email before login.
-         */
+       
         if (!user.isEmailVerified()) {
 
             return null;
@@ -126,9 +117,7 @@ public class UserService {
     }
 
 
-    /* =========================================================
-       VERIFY OTP
-    ========================================================= */
+   
 
     public boolean verifyOtp(
             String email,
@@ -150,50 +139,38 @@ public class UserService {
             return false;
         }
 
-        /*
-         * Already verified.
-         */
+      
         if (user.isEmailVerified()) {
 
             return true;
         }
 
-        /*
-         * OTP does not exist.
-         */
+       
         if (user.getVerificationOtp() == null) {
 
             return false;
         }
 
-        /*
-         * OTP does not match.
-         */
+       
         if (!user.getVerificationOtp().equals(otp)) {
 
             return false;
         }
 
-        /*
-         * OTP expiry does not exist.
-         */
+        
         if (user.getOtpExpiry() == null) {
 
             return false;
         }
 
-        /*
-         * OTP expired.
-         */
+        
         if (LocalDateTime.now()
                 .isAfter(user.getOtpExpiry())) {
 
             return false;
         }
 
-        /*
-         * SUCCESS
-         */
+       
         user.setEmailVerified(true);
 
         user.setVerificationOtp(null);
@@ -206,9 +183,7 @@ public class UserService {
     }
 
 
-    /* =========================================================
-       RESEND OTP
-    ========================================================= */
+    
 
     public boolean resendOtp(String email) {
 
@@ -228,9 +203,7 @@ public class UserService {
             return false;
         }
 
-        /*
-         * No need to resend if already verified.
-         */
+        
         if (user.isEmailVerified()) {
 
             return false;
@@ -256,9 +229,7 @@ public class UserService {
     }
 
 
-    /* =========================================================
-       GENERATE 6 DIGIT OTP
-    ========================================================= */
+   
 
     private String generateOtp() {
 
@@ -269,9 +240,7 @@ public class UserService {
     }
 
 
-    /* =========================================================
-       EMAIL VALIDATION
-    ========================================================= */
+   
 
     private static final Pattern EMAIL_PATTERN =
             Pattern.compile(
