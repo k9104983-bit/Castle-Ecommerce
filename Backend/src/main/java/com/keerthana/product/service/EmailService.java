@@ -18,11 +18,7 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
-    /*
-    ============================================================
-    OTP EMAIL
-    ============================================================
-    */
+   
 
     public void sendOtpEmail(
             String toEmail,
@@ -51,11 +47,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    /*
-    ============================================================
-    ORDER CONFIRMATION EMAIL
-    ============================================================
-    */
+   
 
     public void sendOrderConfirmationEmail(
             String toEmail,
@@ -180,11 +172,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    /*
-    ============================================================
-    ORDER CANCELLATION EMAIL
-    ============================================================
-    */
+  
 
     public void sendOrderCancellationEmail(
             String toEmail,
