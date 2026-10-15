@@ -27,13 +27,6 @@ function Products({
   });
 
   const [saving, setSaving] = useState(false);
-
-  /*
-  ============================================================
-  CASTLE CATEGORY STRUCTURE
-  ============================================================
-  */
-
   const categoryGroups = {
     ELECTRONICS: [
       "COMPUTERS & LAPTOPS",
@@ -59,11 +52,7 @@ function Products({
 
   const mainCategories = Object.keys(categoryGroups);
 
-  /*
-  ============================================================
-  NORMALIZE CATEGORY
-  ============================================================
-  */
+  
 
   const normalizeCategory = (value) => {
     return String(value ?? "")
@@ -72,12 +61,6 @@ function Products({
       .replace(/&/g, "AND")
       .replace(/[^A-Z0-9]+/g, "");
   };
-
-  /*
-  ============================================================
-  CATEGORY LOOKUP
-  ============================================================
-  */
 
   const categoryLookup = useMemo(() => {
     const lookup = {};
@@ -94,17 +77,7 @@ function Products({
       }
     );
 
-    /*
-      Support old database values.
-
-      WATCH
-      WATCHES
-
-      Both belong to:
-
-      FASHION & LIFESTYLE
-      -> WATCH
-    */
+    
 
     lookup["WATCH"] = "FASHION & LIFESTYLE";
     lookup["WATCHES"] = "FASHION & LIFESTYLE";
@@ -112,11 +85,7 @@ function Products({
     return lookup;
   }, []);
 
-  /*
-  ============================================================
-  WATCH VALUE CHECK
-  ============================================================
-  */
+  
 
   const isWatchValue = (value) => {
     const normalized =
@@ -128,11 +97,7 @@ function Products({
     );
   };
 
-  /*
-  ============================================================
-  WATCH PRODUCT CHECK
-  ============================================================
-  */
+
 
   const isWatchProduct = (product) => {
     const productName =
@@ -147,11 +112,7 @@ function Products({
     );
   };
 
-  /*
-  ============================================================
-  GET CANONICAL PRODUCT CATEGORY
-  ============================================================
-  */
+  
 
   const getCanonicalProductCategory = (product) => {
     const rawCategory =
@@ -160,15 +121,7 @@ function Products({
     const rawSubcategory =
       product?.subcategory ?? "";
 
-    /*
-      IMPORTANT:
-
-      If the product itself is a watch,
-      force it into:
-
-      FASHION & LIFESTYLE
-      WATCH
-    */
+   
 
     if (isWatchProduct(product)) {
       return {
@@ -183,17 +136,12 @@ function Products({
     const normalizedSubcategory =
       normalizeCategory(rawSubcategory);
 
-    /*
-      CATEGORY MATCH
-    */
+    
 
     if (categoryLookup[normalizedCategory]) {
       const mainCategory =
         categoryLookup[normalizedCategory];
 
-      /*
-        If category is already a main category.
-      */
 
       if (
         normalizeCategory(mainCategory) ===
@@ -206,9 +154,7 @@ function Products({
         };
       }
 
-      /*
-        If category itself is a subcategory.
-      */
+      
 
       return {
         category: mainCategory,
@@ -221,9 +167,7 @@ function Products({
       };
     }
 
-    /*
-      SUBCATEGORY MATCH
-    */
+
 
     if (categoryLookup[normalizedSubcategory]) {
       return {
@@ -239,9 +183,7 @@ function Products({
       };
     }
 
-    /*
-      Nothing matched.
-    */
+    
 
     return {
       category: rawCategory || "",
@@ -250,11 +192,7 @@ function Products({
     };
   };
 
-  /*
-  ============================================================
-  FIND PRODUCT MAIN CATEGORY
-  ============================================================
-  */
+ 
 
   const getProductMainCategory = (product) => {
     const canonical =
@@ -263,11 +201,7 @@ function Products({
     return canonical.category || "";
   };
 
-  /*
-  ============================================================
-  SELECTED MAIN CATEGORY
-  ============================================================
-  */
+  
 
   const selectedMainCategory = useMemo(() => {
     if (!category) {
@@ -282,11 +216,7 @@ function Products({
     );
   }, [category, categoryLookup]);
 
-  /*
-  ============================================================
-  PRODUCT CATEGORY MATCHING
-  ============================================================
-  */
+  
 
   const matchesSelectedCategory = (product) => {
     if (!category) {
@@ -309,17 +239,7 @@ function Products({
         canonical.subcategory
       );
 
-    /*
-      WATCH FILTER
-
-      Every one of these becomes:
-
-      FASHION & LIFESTYLE -> WATCH
-
-      WATCH
-      WATCHES
-      Product name containing WATCH
-    */
+   
 
     if (
       selected ===
@@ -335,19 +255,14 @@ function Products({
       );
     }
 
-    /*
-      MAIN CATEGORY
-    */
-
+   
     if (
       selected === canonicalCategory
     ) {
       return true;
     }
 
-    /*
-      SUBCATEGORY
-    */
+    
 
     if (
       selected === canonicalSubcategory
@@ -355,10 +270,7 @@ function Products({
       return true;
     }
 
-    /*
-      MAIN CATEGORY FALLBACK
-    */
-
+    
     const productMainCategory =
       normalizeCategory(
         getProductMainCategory(product)
@@ -373,11 +285,6 @@ function Products({
     return false;
   };
 
-  /*
-  ============================================================
-  FILTER + SEARCH + SORT
-  ============================================================
-  */
 
   const filteredProducts = useMemo(() => {
     const searchText =
@@ -448,11 +355,7 @@ function Products({
       );
     });
 
-    /*
-    ==========================================================
-    SORT
-    ==========================================================
-    */
+   
 
     if (sort === "lowToHigh") {
       result.sort(
@@ -497,11 +400,7 @@ function Products({
     categoryLookup
   ]);
 
-  /*
-  ============================================================
-  CLEAR FILTERS
-  ============================================================
-  */
+ 
 
   const clearFilters = () => {
     setSearch("");
@@ -511,11 +410,7 @@ function Products({
     setSort("");
   };
 
-  /*
-  ============================================================
-  CATEGORY SELECTION
-  ============================================================
-  */
+  
 
   const selectMainCategory = (mainCategory) => {
     setCategory(mainCategory);
@@ -534,11 +429,7 @@ function Products({
     );
   };
 
-  /*
-  ============================================================
-  UPDATE PRODUCT
-  ============================================================
-  */
+ 
 
   const startUpdate = (product) => {
     const canonical =
@@ -576,11 +467,7 @@ function Products({
     });
   };
 
-  /*
-  ============================================================
-  CANCEL UPDATE
-  ============================================================
-  */
+  
 
   const cancelUpdate = () => {
     setEditingProduct(null);
@@ -595,11 +482,7 @@ function Products({
     });
   };
 
-  /*
-  ============================================================
-  HANDLE EDIT CHANGE
-  ============================================================
-  */
+  
 
   const handleEditChange = (event) => {
     const {
@@ -613,11 +496,7 @@ function Products({
     }));
   };
 
-  /*
-  ============================================================
-  HANDLE CATEGORY CHANGE
-  ============================================================
-  */
+  
 
   const handleEditCategoryChange = (event) => {
     const newCategory =
@@ -630,11 +509,7 @@ function Products({
     }));
   };
 
-  /*
-  ============================================================
-  UPDATE SUBMIT
-  ============================================================
-  */
+  
 
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
@@ -685,12 +560,7 @@ function Products({
       return;
     }
 
-    /*
-      ALWAYS SAVE WATCH AS:
-
-      FASHION & LIFESTYLE
-      WATCH
-    */
+    
 
     let finalCategory =
       editForm.category;
@@ -756,11 +626,7 @@ function Products({
     }
   };
 
-  /*
-  ============================================================
-  DELETE PRODUCT
-  ============================================================
-  */
+  
 
   const handleDelete = async (product) => {
     if (!product?.id) {
@@ -790,11 +656,7 @@ function Products({
     await deleteProduct(product.id);
   };
 
-  /*
-  ============================================================
-  EDIT SUBCATEGORIES
-  ============================================================
-  */
+  
 
   const editSubcategories =
     editForm.category
@@ -803,11 +665,7 @@ function Products({
         ] || []
       : [];
 
-  /*
-  ============================================================
-  RENDER
-  ============================================================
-  */
+  
 
   return (
     <div className="products-page">
@@ -829,8 +687,7 @@ function Products({
 
       </div>
 
-      {/* UPDATE PANEL */}
-
+     
       {isAdmin &&
         editingProduct && (
           <section className="product-update-panel">
@@ -1077,7 +934,7 @@ function Products({
           </section>
         )}
 
-      {/* CATEGORY NAVIGATION */}
+     
 
       <div className="category-section">
 
@@ -1163,7 +1020,7 @@ function Products({
 
       </div>
 
-      {/* FILTER */}
+      
 
       <ProductFilter
         search={search}
@@ -1180,7 +1037,7 @@ function Products({
         onClear={clearFilters}
       />
 
-      {/* RESULT */}
+    
 
       <div className="products-result-info">
 
@@ -1201,7 +1058,7 @@ function Products({
 
       </div>
 
-      {/* EMPTY */}
+      
 
       {filteredProducts.length ===
       0 ? (
