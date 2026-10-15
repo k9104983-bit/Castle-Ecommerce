@@ -63,9 +63,7 @@ function Checkout({
   return (
     <div className="checkout-page">
 
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+      
 
       <section className="page-header">
         <span>✦ CASTLE CHECKOUT ✦</span>
@@ -80,19 +78,17 @@ function Checkout({
 
       <div className="checkout-layout">
 
-        {/* ===================================================
-            LEFT SIDE
-        =================================================== */}
+
 
         <div className="checkout-items">
 
-          {/* DELIVERY ADDRESS */}
+         
 
           <h2>Delivery Address</h2>
 
           <div className="address-form">
 
-            {/* FULL NAME */}
+           
 
             <div className="checkout-field">
 
@@ -109,7 +105,7 @@ function Checkout({
             </div>
 
 
-            {/* PHONE */}
+            
 
             <div className="checkout-field">
 
@@ -127,7 +123,7 @@ function Checkout({
             </div>
 
 
-            {/* HOUSE / STREET */}
+          
 
             <div className="checkout-field">
 
@@ -146,7 +142,7 @@ function Checkout({
             </div>
 
 
-            {/* CITY */}
+
 
             <div className="checkout-field">
 
@@ -163,7 +159,7 @@ function Checkout({
             </div>
 
 
-            {/* STATE */}
+           
 
             <div className="checkout-field">
 
@@ -180,7 +176,7 @@ function Checkout({
             </div>
 
 
-            {/* PINCODE */}
+
 
             <div className="checkout-field">
 
@@ -200,9 +196,6 @@ function Checkout({
           </div>
 
 
-          {/* =================================================
-              ORDER ITEMS
-          ================================================= */}
 
           <h2 className="order-items-title">
             Your Order
@@ -223,10 +216,7 @@ function Checkout({
               );
 
 
-            /*
-             * Get the product name from cart first,
-             * then backend product data.
-             */
+            
 
             const productName =
               item.name ||
@@ -235,12 +225,7 @@ function Checkout({
               "Product";
 
 
-            /*
-             * Your Product entity currently
-             * stores imageUrl.
-             *
-             * So this displays the stored URL.
-             */
+          
 
             const productUrl =
               product?.imageUrl ||
@@ -278,7 +263,7 @@ function Checkout({
                   </p>
 
 
-                  {/* PRODUCT URL */}
+                  
 
                   {productUrl && (
 
@@ -312,9 +297,7 @@ function Checkout({
         </div>
 
 
-        {/* ===================================================
-            RIGHT SIDE
-        =================================================== */}
+       
 
         <div className="checkout-summary">
 
@@ -328,7 +311,7 @@ function Checkout({
           </h2>
 
 
-          {/* ITEMS */}
+         
 
           <div className="summary-row">
 
@@ -352,7 +335,7 @@ function Checkout({
           </div>
 
 
-          {/* SUBTOTAL */}
+         
 
           <div className="summary-row">
 
@@ -370,8 +353,7 @@ function Checkout({
           </div>
 
 
-          {/* DELIVERY */}
-
+        
           <div className="summary-row">
 
             <span>
@@ -385,7 +367,7 @@ function Checkout({
           </div>
 
 
-          {/* PAYMENT METHOD */}
+        
 
           <div className="payment-method">
 
@@ -411,7 +393,7 @@ function Checkout({
           </div>
 
 
-          {/* DELIVERY NOTE */}
+
 
           <div className="delivery-note">
 
@@ -424,7 +406,7 @@ function Checkout({
           </div>
 
 
-          {/* TOTAL */}
+         
 
           <div className="summary-total">
 
@@ -442,7 +424,7 @@ function Checkout({
           </div>
 
 
-          {/* CONFIRM ORDER */}
+         
 
           <button
             className="checkout-btn"
@@ -457,7 +439,7 @@ function Checkout({
           </button>
 
 
-          {/* BACK */}
+        
 
           <button
             className="back-cart-btn"
