@@ -12,13 +12,13 @@ function Home({
   return (
     <div className="home-page">
 
-      {/* HERO WITH SLIDING PRODUCTS */}
+      
       <Hero
         products={products}
         onExplore={onProducts}
       />
 
-      {/* FEATURED PRODUCTS */}
+      
       <section className="section">
 
         <div className="section-heading">
@@ -50,7 +50,7 @@ function Home({
 
       </section>
 
-      {/* CASTLE STORY */}
+     
       <section className="story-section">
 
         <div className="story-content">
