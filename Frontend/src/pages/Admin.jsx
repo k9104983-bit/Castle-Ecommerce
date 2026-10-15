@@ -7,11 +7,7 @@ function Admin({
   onUpdateProduct,
   onDeleteProduct
 }) {
-  /*
-  ============================================================
-  CASTLE CATEGORY STRUCTURE
-  ============================================================
-  */
+
 
   const categoryData = {
     ELECTRONICS: [
@@ -36,11 +32,7 @@ function Admin({
     ]
   };
 
-  /*
-  ============================================================
-  EMPTY FORM
-  ============================================================
-  */
+  
 
   const emptyForm = {
     name: "",
@@ -54,12 +46,7 @@ function Admin({
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
 
-  /*
-  ============================================================
-  NORMALIZE
-  ============================================================
-  */
-
+ 
   const normalizeCategory = (value) => {
     return String(value ?? "")
       .trim()
@@ -68,11 +55,7 @@ function Admin({
       .replace(/[^A-Z0-9]+/g, "");
   };
 
-  /*
-  ============================================================
-  WATCH VALUE
-  ============================================================
-  */
+  
 
   const isWatchValue = (value) => {
     const normalized =
@@ -84,11 +67,7 @@ function Admin({
     );
   };
 
-  /*
-  ============================================================
-  WATCH PRODUCT
-  ============================================================
-  */
+  
 
   const isWatchProduct = (product) => {
     const productName =
@@ -103,21 +82,12 @@ function Admin({
     );
   };
 
-  /*
-  ============================================================
-  CANONICAL PRODUCT CATEGORY
-  ============================================================
-  */
+  
 
   const getCanonicalProductCategory = (
     product
   ) => {
-    /*
-      Any watch becomes:
-
-      FASHION & LIFESTYLE
-      WATCH
-    */
+    
 
     if (isWatchProduct(product)) {
       return {
@@ -138,11 +108,7 @@ function Admin({
     };
   };
 
-  /*
-  ============================================================
-  HANDLE CHANGE
-  ============================================================
-  */
+ 
 
   const handleChange = (e) => {
     const {
@@ -164,22 +130,14 @@ function Admin({
     }
   };
 
-  /*
-  ============================================================
-  CLEAR FORM
-  ============================================================
-  */
+  
 
   const clearForm = () => {
     setForm(emptyForm);
     setEditingId(null);
   };
 
-  /*
-  ============================================================
-  SUBMIT
-  ============================================================
-  */
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -211,19 +169,7 @@ function Admin({
       return;
     }
 
-    /*
-    ==========================================================
-    WATCH CONVERSION
-    ==========================================================
-
-    If the product is a watch, ALWAYS save:
-
-    category:
-    FASHION & LIFESTYLE
-
-    subcategory:
-    WATCH
-    */
+   
 
     let finalCategory =
       form.category;
@@ -286,11 +232,7 @@ function Admin({
     }
   };
 
-  /*
-  ============================================================
-  START UPDATE
-  ============================================================
-  */
+ 
 
   const startUpdate = (product) => {
     const canonical =
@@ -328,11 +270,7 @@ function Admin({
     });
   };
 
-  /*
-  ============================================================
-  SUBCATEGORIES
-  ============================================================
-  */
+  
 
   const subcategories =
     form.category
@@ -341,11 +279,6 @@ function Admin({
         ] || []
       : [];
 
-  /*
-  ============================================================
-  RENDER
-  ============================================================
-  */
 
   return (
     <div className="admin-page">
